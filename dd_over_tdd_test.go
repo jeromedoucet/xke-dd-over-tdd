@@ -27,7 +27,7 @@ func Test_Should_Compute_0_For_Akuku(t *testing.T) {
 
 func Test_Should_Convert_In_Type(t *testing.T) {
 	var ddtype, _ = convertToType("Akuku")
-	assert.Equal(t, "A", ddtype)
+	assert.Equal(t, 'A', ddtype)
 }
 
 func Test_Should_Convert_In_Item_for_Akuku(t *testing.T) {

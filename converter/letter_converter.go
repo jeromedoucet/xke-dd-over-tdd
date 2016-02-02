@@ -1,15 +1,15 @@
-package main
+package converter
 import (
-	"strings"
 	"errors"
+	"unicode"
 )
 
-func convert(letter string) (result int, err error) {
+func Convert(letter rune) (result int, err error) {
 	var value, ok = reference[letter]
 	if (ok) {
 		return value, err
 	}
-	value, ok = reference[strings.ToUpper(letter)]
+	value, ok = reference[unicode.ToUpper(letter)]
 	if (ok) {
 		return value, err
 	}

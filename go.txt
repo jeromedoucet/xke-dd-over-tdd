@@ -10,3 +10,6 @@ Dans un Terminal
 
 Notes
 https://github.com/stretchr/testify#installation
+
+todo : ajouter une fonction lootSomeStuff qui appellera toutes les autres pour ne pas se trainer les err partout et simplifier les test
+todo : ajouter des tests blackbox / whitebox
