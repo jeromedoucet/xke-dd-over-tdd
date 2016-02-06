@@ -5,36 +5,38 @@ import (
 	"xke-dd-over-tdd/converter"
 )
 
-func reduce(value int) (computed int, err error) {
-	for _, runeVal := range strconv.Itoa(value) {
-		computed += int(runeVal - '0')
-	}
-	if (computed > 9) {
-		computed, err = reduce(computed)
-	}
-	return computed, err
+func LootSomeStuff(playerName string) string {
+	number := convertToNumber(playerName)
+	digit := reduceToDigit(number)
+	itemType := convertToType(digit)
+	return convertToItem(itemType)
 }
 
-func convertToNumber(name string) (int, error) {
-	var sum int = 0
+func convertToNumber(name string) uint {
+	var sum uint = 0
 	for _, runeVal := range name {
 		value, err := converter.Convert(runeVal)
-		// todo test case
-		if err != nil {
-			return sum, err
+		if err == nil {
+			sum += uint(value)
 		}
-		sum += value
 	}
-	return reduce(sum)
+	return sum
 }
 
-func convertToType(name string) (rune, error) {
-	num, err := convertToNumber(name)
-	// todo handle errors !
-	return converter.ItemsReferences[num], err
+func reduceToDigit(value uint) (aggregate uint) {
+	for _, runeVal := range strconv.Itoa(int(value)) {
+		aggregate += uint(runeVal - '0')
+	}
+	if (aggregate > 9) {
+		aggregate = reduceToDigit(aggregate)
+	}
+	return aggregate
 }
 
-func convertToItem(name string) (string, error) {
-	dndType, err := convertToType(name)
-	return converter.Items[dndType], err
+func convertToType(intType uint) rune {
+	return converter.ItemsReferences[int(intType)]
+}
+
+func convertToItem(itemType rune) string {
+	return converter.Items[itemType]
 }
