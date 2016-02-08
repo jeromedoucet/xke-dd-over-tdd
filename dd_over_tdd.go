@@ -27,7 +27,7 @@ func reduceToDigit(value uint) (aggregate uint) {
 	for _, runeVal := range strconv.Itoa(int(value)) {
 		aggregate += uint(runeVal - '0')
 	}
-	if (aggregate > 9) {
+	if aggregate > 9 {
 		aggregate = reduceToDigit(aggregate)
 	}
 	return aggregate
